@@ -441,7 +441,7 @@ class ZarrStore(AbstractWritableDataStore):
 
     def get_variables(self):
         return FrozenDict(
-            (k, self.open_store_variable(k, v)) for k, v in self.zarr_group.arrays()
+            (v.path, self.open_store_variable(v.path, v)) for k, v in self.ds.arrays(recurse=True)
         )
 
     def get_attrs(self):
